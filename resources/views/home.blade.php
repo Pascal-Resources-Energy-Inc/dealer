@@ -246,6 +246,8 @@
     <div class="section">
         <div class="section-header">
             <h3>Promo</h3>
+            <a href="{{ url ('add_promo') }}" class="view-more">Add promo</a>
+        </div>
         </div>
         <div class="image-slider-container">
             <div class="slider-wrapper">

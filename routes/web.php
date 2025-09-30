@@ -28,6 +28,10 @@ Route::get('/home_dealer', 'HomeDealerController@index')->name('home_dealer');
 Route::get('/products', 'ProductController@index')->name('products.index');
 Route::get('/popular', 'ProductController@popular')->name('popular.index');
 
+Route::get('/add_promo', function () {
+    return view('add_promo');
+})->name('add_promo');
+
 Route::get('/account', function () {
     return view('account');
 })->name('account');

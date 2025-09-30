@@ -7,13 +7,13 @@
       <button class="back-btn" onclick="history.back()">
         <i class="bi bi-chevron-left"></i>
       </button>
-      <h1 class="page-title">List of Product</h1>
+      <h1 class="page-title">Add Promo</h1>
     </div>
     
     <div class="form-container">
       <!-- Deals Product Section -->
       <div class="section-header">
-        <h2>Deals Product</h2>
+        <h2>Deals</h2>
       </div>
 
       <!-- Product Name -->
