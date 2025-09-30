@@ -2433,7 +2433,7 @@
         // Enhanced confirm - add to cart with immediate refresh
         if (confirmBtn) {
             confirmBtn.addEventListener('click', function() {
-                var qty = parseInt(qtyInput.value) || 1;
+                var qty = parseInt(qtyInput.value) || 0;
                 
                 if (qty <= 0) {
                     displayToast('Please enter a valid quantity', 'warning');

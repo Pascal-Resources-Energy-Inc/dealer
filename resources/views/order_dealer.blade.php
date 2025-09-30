@@ -176,8 +176,6 @@
     }
 
     .order-items {
-      max-height: 200px;
-      overflow-y: auto;
       border-top: 1px solid #f0f0f0;
       margin-top: 15px;
       padding-top: 15px;

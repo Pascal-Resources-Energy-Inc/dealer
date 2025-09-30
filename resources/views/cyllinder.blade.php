@@ -1374,7 +1374,7 @@
 
             // Confirm button - add to cart
             confirmBtn.addEventListener('click', function() {
-                const qty = parseInt(qtyInput.value) || 1;
+                const qty = parseInt(qtyInput.value) || 0;
                 
                 if (qty > 0) {
                     let prodData;

@@ -118,6 +118,36 @@
         </div>
     </div>
 
+    <!-- <div class="section">
+        <div class="section-header">
+            <h3>Current Order</h3>
+            <a href="{{ url('/orders') }}" class="see-details">See Details</a>
+        </div>
+        
+        <div class="order-status-card">
+            <div class="status-progress">
+                <div class="progress-step active">
+                    <div class="step-dot"></div>
+                    <span class="step-label">Preparing</span>
+                </div>
+                <div class="progress-line-container">
+                    <div class="progress-line active"></div>
+                </div>
+                <div class="progress-step active">
+                    <div class="step-dot"></div>
+                    <span class="step-label">On the way</span>
+                </div>
+                <div class="progress-line-container">
+                    <div class="progress-line-2"></div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-dot"></div>
+                    <span class="step-label">Delivered</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
     <!-- Product Line Section -->
     <div class="section">
         <div class="section-header">
@@ -151,7 +181,7 @@
             <div class="product-item">
                 <a href="{{ url('torch') }}">
                     <div class="product-icon torch">
-                        <img src="images/torchs.png">
+                        <img src="images/torch-red.png">
                     </div>
                     <span>Torch</span>
                 </a>
@@ -480,6 +510,162 @@
         margin-bottom: 30px;
         color: white;
         overflow: hidden;
+    }
+
+    .current-order-section {
+        background: #F8F9FA;
+        border-radius: 7.29px !important;
+        padding: 25px 20px;
+        margin-bottom: 25px;
+    }
+
+    .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .order-header h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #2D2D2D;
+        margin: 0;
+    }
+
+    .see-details {
+        color: #4A90E2;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+
+    .see-details:hover {
+        color: #186ed1;
+        text-decoration: none;
+    }
+
+    .order-status-card {
+        background: white;
+        border-radius: 7.29px;
+        padding: 25px 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .status-progress {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .progress-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        flex: 0 0 auto;
+        z-index: 2;
+    }
+
+    .step-dot {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #D1D5DB;
+        transition: all 0.3s ease;
+    }
+
+    .progress-step.active .step-dot {
+        background: #4A90E2;
+    }
+
+    .step-label {
+        font-size: 13px;
+        color: #6B7280;
+        font-weight: 500;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+    .progress-step.active .step-label {
+        color: #2D2D2D;
+        font-weight: 600;
+    }
+
+    .progress-line-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: 0;
+        position: relative;
+        top: 10px;
+    }
+
+    .progress-line {
+        position: absolute;
+        margin: 0 -29px;
+        width: 170%;
+        height: 4px;
+        background: #D1D5DB;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    .progress-line-2 {
+        position: absolute;
+        margin: 0 -29px;
+        width: 157%;
+        height: 4px;
+        background: #D1D5DB;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    .progress-line.active {
+        background: #4A90E2;
+    }
+
+    /* Hide order section if no active order */
+    .current-order-section.hidden {
+        display: none;
+    }
+
+    @media (max-width: 480px) {
+        .order-header {
+            margin-bottom: 20px;
+        }
+        
+        .order-header h3 {
+            font-size: 18px;
+        }
+        
+        .see-details {
+            font-size: 13px;
+        }
+        
+        .order-status-card {
+            padding: 20px 15px;
+        }
+        
+        .step-dot {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .step-label {
+            font-size: 11px;
+        }
+        
+        .progress-line-container {
+            padding: 0 5px;
+            top: 8px;
+        }
+        
+        .progress-line {
+            height: 3px;
+        }
     }
 
     .banner-content {
@@ -1700,19 +1886,29 @@ class ImageSlider {
         const slideWidth = 100 / this.totalSlides; 
         const translateX = -this.currentSlide * slideWidth;
 
-        // If we're moving forward past the last slide
         if (this.currentSlide >= this.totalSlides) {
             this.sliderTrack.style.transition = 'none';
             this.currentSlide = 0;              
             this.sliderTrack.style.transform = `translateX(0%)`;
-            return; // stop here, no flash
+            
+            this.sliderTrack.offsetHeight;
+            
+            this.indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === 0);
+            });
+            return;
         }
 
-        // If we're moving backward past the first slide
         if (this.currentSlide < 0) {
             this.sliderTrack.style.transition = 'none'; 
             this.currentSlide = this.totalSlides - 1; 
             this.sliderTrack.style.transform = `translateX(-${(this.totalSlides - 1) * slideWidth}%)`;
+            
+            this.sliderTrack.offsetHeight;
+            
+            this.indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === this.currentSlide);
+            });
             return;
         }
 
@@ -1811,6 +2007,9 @@ function saveCartItems(cartItems) {
     localStorage.setItem('cartItems', itemCount);
     localStorage.setItem('cartTotal', totalPrice.toFixed(2));
     
+    // Update the badge display
+    updateCartBadge();
+    
     console.log('Cart saved - items: ' + itemCount + ', total: ₱' + totalPrice);
 }
 
@@ -1864,6 +2063,7 @@ function refreshAllButtonDisplays() {
         updateHomeButtonDisplay(button, currentQty);
     });
 }
+
 
 // Updated showHomeQtyModal function
 function showHomeQtyModal(btn, productName, price, productImg) {
@@ -1970,7 +2170,7 @@ function setupHomeModalEvents(modal, price, originalButton, productName, current
     homeModalOverlay.addEventListener('click', closeHomeModal);
 
     confirmBtn.addEventListener('click', function() {
-        var addQty = parseInt(qtyInput.value) || 1;
+        var addQty = parseInt(qtyInput.value) || 0;
         var newTotalQty = currentCartQty + addQty;
         
         if (addQty > 0) {
@@ -2054,7 +2254,7 @@ function handleHomeAddBtnClick(btn) {
 // DOM Content Loaded Event
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded - initializing...');
-    
+    updateCartBadge();
     homeModalOverlay = document.createElement('div');
     homeModalOverlay.className = 'home_modal_overlay';
     homeModalOverlay.id = 'homeModalOverlay';

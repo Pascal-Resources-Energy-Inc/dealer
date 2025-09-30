@@ -1160,6 +1160,7 @@ function updateCartBadge() {
 
             if (totalItems > 0) {
                 badge.textContent = totalItems;
+                badge.style.display = 'flex';
                 badge.classList.add('show');
 
                 if (totalItems > currentCount) {
@@ -1170,7 +1171,7 @@ function updateCartBadge() {
                 }
             } else {
                 badge.textContent = '';
-                badge.style.display = 'none'; // 👈 HIDE badge
+                badge.style.display = 'none';
                 badge.classList.remove('show');
             }
         }
@@ -1181,12 +1182,11 @@ function updateCartBadge() {
         const badge = document.getElementById('cartBadge');
         if (badge) {
             badge.textContent = '';
-            badge.style.display = 'none'; // 👈 HIDE on error too
+            badge.style.display = 'none';
             badge.classList.remove('show');
         }
     }
 }
-
 
 function updateFloatingCartButton() {
     try {
